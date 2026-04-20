@@ -1,12 +1,16 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Auth } from './auth/auth';
+import { LearningResources } from './learning-resources/learning-resources';
+import { AuthService } from './auth/services/auth-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Auth, LearningResources],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('directive-deep-dive');
+  private AuthService = inject(AuthService);
+
+  isAdmin = computed(() => this.AuthService.activePermission() === 'admin');
 }
