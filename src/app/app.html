@@ -4,7 +4,16 @@
   <hr />
 
   <app-auth />
-  @if(isAdmin()) {
+  <!-- @if(isAdmin()) {
   <p>Only Admin users can see this content.</p>
-  }
+  } -->
+
+  <!--<ng-template appAuthDirective="admin">
+    <p>Only Admin users can see this content.</p>
+  </ng-template> -->
+
+  <p *appAuthDirective="'admin'" class="protected-content admin">Only Admin users can see this content.</p>
+  <p *appAuthDirective="'user'" class="protected-content unauthenticated">Only Regular users can see this content.</p>
+  <p *appAuthDirective="'guest'" class="protected-content authenticated">Guest users can see this content.</p>
+
 </main>
